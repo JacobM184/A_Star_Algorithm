@@ -10,8 +10,8 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
     mapSize = size(map);
     mapNumEl = numel(map);
     
-    % set what value nodes are NOT obstructions
-    notObstruction = 1;
+    % set what value nodes are obstructions
+    Obstruction = 1;
     
     % default return
     path = [];
@@ -94,7 +94,7 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
             % the neighbour in question is not an obstruction 
             if((neighbourRow <= mapSize(1)) && (neighbourCol <= mapSize(2))...
                     && (neighbourRow >= 1) && (neighbourCol >= 1)...
-                    && (map(neighbourRow, neighbourCol) ~= notObstruction))
+                    && (map(neighbourRow, neighbourCol) ~= Obstruction))
                 
                 %get tentative G Cost
                 tentative_GCost = gCost(currRow, currCol) + neighbourG;
