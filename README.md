@@ -18,8 +18,13 @@ Note that the algorithm currently moves through all spaces with a value of '0'. 
 
 ## Outputs
 
-This function outputs a list of coordinates from the goal coordinate to the start coordinate. The list will be of the size (numOfElementsInMap, 2). the first column of each row will hold a row coordinate value, and the second column will hold a column coordinate value.
+This function outputs a list of coordinates from the goal coordinate to the start coordinate. The list will be of the size (numOfElementsInMap, 2). The first column of each row will hold a row coordinate value, and the second column will hold a column coordinate value.
 
 Because the backtracking function is rather basic, this list will usually have a size larger than the route to be returned. This means that there will be a number of zero terms after the start coord and the end of list. Note that this function does NOT plot the path, though it may easily be plotted using the outputted list.
 
 If you would also like to output each row and column as the algorithm goes to it, then uncomment lines 70 to 73 in the a_star.m file.
+
+## How A* works
+(more detail to be added soon)
+
+The basic idea behind the A* algorithm is defined by the equation **F = G + H**. In this equation, G is the distance between the current node and the start node and H is the heiristic - or the estimated distance from the current node to the end node. For every current node, the A* algorithm calculates the F value (i.e. the total cost of the node) of all its neighbours in the four cardinal directions. It then updataes the F cost values on the fCost map and chooses the minimum fCost for the next current node. What this means is that the algorithm has a sense of direction - H cost will be lower as you move closer to the goal, so the F cost will likely also be lower as you move towards the goal.
