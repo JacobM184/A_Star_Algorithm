@@ -10,8 +10,8 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
     mapSize = size(map);
     mapNumEl = numel(map);
     
-    % set what value nodes are obstructions
-    Obstruction = 1;
+    % set what value nodes are NOT obstructions
+    notObstruction = 1;
     
     % default return
     path = [];
@@ -61,7 +61,9 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
         
         %check if goal has been reached
         if ((currRow == goalRow) && (currCol == goalCol))
-            path = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, startCol, startRow); 
+            path = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, startCol, startRow);
+            
+            plotmap(map, path)
             return
         end
         
@@ -94,7 +96,7 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
             % the neighbour in question is not an obstruction 
             if((neighbourRow <= mapSize(1)) && (neighbourCol <= mapSize(2))...
                     && (neighbourRow >= 1) && (neighbourCol >= 1)...
-                    && (map(neighbourRow, neighbourCol) ~= Obstruction))
+                    && (map(neighbourRow, neighbourCol) ~= notObstruction))
                 
                 %get tentative G Cost
                 tentative_GCost = gCost(currRow, currCol) + neighbourG;
@@ -129,8 +131,10 @@ function heuristic = calcH(fromCol, fromRow, toCol, toRow)
     heuristic = sqrt((fromCol - toCol).^2 + (fromRow - toRow).^2);
 end
 
-function route = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
+function routeF = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
     startCol, startRow)
+
+    routeF = [];
     
     %create matrix to store the route
     route = zeros(mapNumEl, 2);
@@ -159,21 +163,28 @@ function route = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
         
         % protection from invalid row value
         if((prevRow < 1) || (isnan(prevRow)))
+            routeF = route(1:count, :);
+            routeF = flip(routeF);
             return
         end
         
         % protection from invalid column value
         if((prevCol < 1) || (isnan(prevCol)))
+            routeF = route(1:count, :);
+            routeF = flip(routeF);
             return
         end
         
         % code to stop loop once start has been reached
         if((route(count, 1) == startRow) && ...
                 route(count, 2) == startCol)
+            routeF = route(1:count, :);
+            routeF = flip(routeF);
             return
         end
         
         
-    end
+    end   
+    
     
 end
