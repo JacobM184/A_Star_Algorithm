@@ -20,7 +20,7 @@ Note that the algorithm currently moves through all spaces with a value of '0'. 
 
 This function outputs a list of coordinates from the goal coordinate to the start coordinate. The list will be of the size (numOfElementsInMap, 2). The first column of each row will hold a row coordinate value, and the second column will hold a column coordinate value.
 
-Because the backtracking function is rather basic, this list will usually have a size larger than the route to be returned. This means that there will be a number of zero terms after the start coord and the end of list. Note that this function does NOT plot the path, though it may easily be plotted using the outputted list.
+The list of neighbors/nodes in the optimal path is outputted in order from the start to the goal node. The code also has the functionality to plot the path onto a graph.
 
 If you would also like to output each row and column as the algorithm goes to it, then uncomment lines 70 to 73 in the a_star.m file.
 
