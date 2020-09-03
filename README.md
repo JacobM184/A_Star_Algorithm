@@ -34,7 +34,7 @@ If you would also like to output each row and column as the algorithm goes to it
 
 The basic idea behind the A* algorithm is defined by the equation **F = G + H**. 
 
-In this equation, **G** is the distance between the current node and the start node. This is essentially calculated by adding a new distance to the existing G Cost of the current node as we move to the next node. For example, in the image below, the blue line represents the G Cost from node 1 to node 8:
+In this equation, **G** is the distance between the current node and the start node. This is essentially calculated by adding a new distance to the existing G Cost of the current node as we move to the next node. For example, in the image below, the blue line represents the G Cost at node 8, if travelling from node 1:
 
 ![](graphics/GCost.jpg)
 
