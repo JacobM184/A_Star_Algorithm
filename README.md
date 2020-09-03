@@ -3,7 +3,7 @@ Implementation of the A* Pathfinding algorithm in MATLAB
 
 ## Instructions
 
-To run this algorithm, you must download all the files (graphics folder not necessary) into one directory, and then run the main.m file. Edits can be made to the main.m file to modify the map and/or the start and goal coordinates. 
+To run this algorithm, you must download all the files (PNG file not necessary) into one directory, and then run the main.m file. Edits can be made to the main.m file to modify the map and/or the start and goal coordinates. 
 
 This A* Algorithm takes the following 5 inputs:
 - startCol - this is the column value for the starting position
@@ -22,7 +22,7 @@ Note that the algorithm currently moves through all spaces with a value of '0'. 
 
 By default, the main.m file outputs the time it takes for the a_star() function to run, as well as prints out the map and the calculated route as seen below:
 
-![](graphics/map8Sol.png)
+![](map8Sol.png)
 
 The a_star.m file itself outputs a list of coordinates from the goal coordinate to the start coordinate. The list will be of the size (numOfElementsInMap, 2). The first column of each row will hold a row coordinate value, and the second column will hold a column coordinate value.
 
