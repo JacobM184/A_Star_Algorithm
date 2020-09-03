@@ -22,7 +22,7 @@ Note that the algorithm currently moves through all spaces with a value of '0'. 
 
 By default, the main.m file outputs the time it takes for the a_star() function to run, as well as prints out the map and the calculated route as seen below:
 
-![](graphics/map8Sol.png)
+<img src="graphics/map8Sol.png" width="500" height="350">
 
 The a_star.m file itself outputs a list of coordinates from the goal coordinate to the start coordinate. The list will be of the size (numOfElementsInMap, 2). The first column of each row will hold a row coordinate value, and the second column will hold a column coordinate value.
 
@@ -36,11 +36,11 @@ The basic idea behind the A* algorithm is defined by the equation **F = G + H**.
 
 In this equation, **G** is the distance between the current node and the start node. This is essentially calculated by adding a new distance to the existing G Cost of the current node as we move to the next node. For example, in the image below, the blue line represents the G Cost from node 1 to node 8:
 
-![](graphics/GCost.png)
+![](graphics/GCost.jpg)
 
 The **H** refers to the from the current node to the end node. While this can be calculated accurately, it is time consuming and computationally expensive. Therefore, a approximation/heuristic is used. For this A* implementation, I have used Euclidean distance to calculate the H Cost. For example, in the image below, the blue line represents the F Cost from node 1, while the black lines represent the distances thatare required to calculate the F Cost:
 
-![](graphics/FCost.png)
+<img src="graphics/HCost.jpg" width="500" height="350">
 
 For every current node, the A* algorithm calculates the **F** values (i.e. the total cost of the node) of all its neighbours in the four cardinal directions. It then updates the F cost values on the fCost map and chooses the minimum fCost for the next current node. What this essentially means is that the algorithm has a sense of direction - H cost will be lower as you move closer to the goal, so the F cost will likely also be lower as you move towards the goal.
 
