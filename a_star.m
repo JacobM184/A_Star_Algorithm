@@ -42,27 +42,12 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
     while any(openSet(:) == true)
 
         % find coords of minimum fCost on the map
-        [currentRow, currentCol] = find(ismember(fCost, min(fCost(:))));
-        currSizeR = size(currentRow);
-        currSizeC = size(currentCol);
-        
-        % get row & col subscripts for current
-        if(currSizeR(1) == 1)
-            currRow = max(currentRow);
-        else
-            currRow = currentRow(2);
-        end
-        
-        if(currSizeC(1) == 1)
-            currCol = max(currentCol);
-        else
-            currCol = currentCol(2);
-        end
+        [~, idx] = min(fCost(:));
+        [currRow, currCol] = ind2sub(size(fCost), idx);
         
         %check if goal has been reached
         if ((currRow == goalRow) && (currCol == goalCol))
             path = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, startCol, startRow);
-            
             plotmap(map, path)
             return
         end
@@ -106,7 +91,7 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
                 if(tentative_GCost < gCost(neighbourRow, neighbourCol))
                     
                     % update origin
-                    cameFrom(neighbourRow, neighbourCol, 1) = currRow; %FIX THIS
+                    cameFrom(neighbourRow, neighbourCol, 1) = currRow; 
                     cameFrom(neighbourRow, neighbourCol, 2) = currCol;
                     
                     % update G cost for the neighbour
@@ -133,12 +118,10 @@ end
 
 function routeF = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
     startCol, startRow)
-
     routeF = [];
     
     %create matrix to store the route
-    route = zeros(mapNumEl, 2);
-    count = 1;
+    route = [];
     
     % set first values (this will be the ending coordinates)
     route(1, 1) = goalRow;
@@ -148,12 +131,10 @@ function routeF = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
     prevRow = goalRow;
     prevCol = goalCol;
 
-    % while loop to go through all
-    while count < mapNumEl
-        % increment count to access next element in route
-        count = count + 1;
+    % for loop to go through all path elements
+    for count = 2:mapNumEl
 
-        % update rout with new coord values
+        % update route with new coord values
         route(count, 1) = cameFrom(prevRow, prevCol, 1);
         route(count, 2) = cameFrom(prevRow, prevCol, 2);
 
@@ -162,29 +143,17 @@ function routeF = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
         prevCol = route(count, 2);
         
         % protection from invalid row value
-        if((prevRow < 1) || (isnan(prevRow)))
-            routeF = route(1:count, :);
-            routeF = flip(routeF);
-            return
-        end
-        
-        % protection from invalid column value
-        if((prevCol < 1) || (isnan(prevCol)))
+        if((prevRow < 1) || (prevCol < 1))
             routeF = route(1:count, :);
             routeF = flip(routeF);
             return
         end
         
         % code to stop loop once start has been reached
-        if((route(count, 1) == startRow) && ...
-                route(count, 2) == startCol)
+        if(route(count, :) == [startRow, startCol])
             routeF = route(1:count, :);
             routeF = flip(routeF);
             return
-        end
-        
-        
-    end   
-    
-    
+        end   
+    end 
 end
