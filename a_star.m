@@ -11,7 +11,7 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
     mapNumEl = numel(map);
     
     % set what value nodes are NOT obstructions
-    notObstruction = 1;
+    Obstruction = 1;
     
     % default return
     path = [];
@@ -22,14 +22,14 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
     % set start node to false in unvisted set
     openSet(startRow, startCol) = false;
     
-    %origin set
+    % origin set
     cameFrom = zeros(mapSize(1), mapSize(2), 2);
     
     % set G cost to infinity for all nodes except for start node
     gCost = inf(mapSize);
     gCost(startRow, startCol) = 0;
     
-    %set F cost to infinity everywhere
+    % set F cost to infinity everywhere
     fCost = inf(mapSize);
     
     % For start, calculate the H Cost + G cost (which is 0) an update
@@ -45,10 +45,9 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
         [~, idx] = min(fCost(:));
         [currRow, currCol] = ind2sub(size(fCost), idx);
         
-        %check if goal has been reached
+        % check if goal has been reached
         if ((currRow == goalRow) && (currCol == goalCol))
             path = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, startCol, startRow);
-            plotmap(map, path)
             return
         end
         
@@ -63,13 +62,13 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
         % remove current from openSet set
         openSet(currRow, currCol) = false;
         
-        %set F cost of current node to infinity to avoid reselection
+        % set F cost of current node to infinity to avoid reselection
         fCost(currRow, currCol) = inf;
         
         % G cost for neighbours 
         neighbourG = 1;
 
-        % loop to go through all the 8 possible surrounding neighbours
+        % loop to go through all the 4 possible surrounding neighbours
         for i = 1:4
             
             % get coords for neighbour i
@@ -81,9 +80,9 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
             % the neighbour in question is not an obstruction 
             if((neighbourRow <= mapSize(1)) && (neighbourCol <= mapSize(2))...
                     && (neighbourRow >= 1) && (neighbourCol >= 1)...
-                    && (map(neighbourRow, neighbourCol) ~= notObstruction))
+                    && (map(neighbourRow, neighbourCol) ~= Obstruction))
                 
-                %get tentative G Cost
+                % get tentative G Cost
                 tentative_GCost = gCost(currRow, currCol) + neighbourG;
                 
                 % if statement to update G and F cost-sets if path is
@@ -118,9 +117,9 @@ end
 
 function routeF = backtrackPath(cameFrom, goalCol, goalRow, mapNumEl, ...
     startCol, startRow)
+  
+    % create matrix to store the route
     routeF = [];
-    
-    %create matrix to store the route
     route = [];
     
     % set first values (this will be the ending coordinates)
