@@ -13,7 +13,7 @@ This A* Algorithm takes the following 5 inputs:
 - map - this is the matrix that represents the map (NOTE: you will have to use the map_convert function from the provided MATLAB codebase to store this as a matrix)
 
 Note: the end positions for the two provided maps in (row, col) format are as follows:
-- map_8.txt -> (14,1) & (1, 18)
+- map_8.txt -> (14,1), (4, 2), (2, 2), (14, 10) & (1, 18)
 - map_1.txt -> (2, 2), (6, 2), (10, 2) & (12, 6)
 
 Note that the algorithm currently moves through all spaces with a value of '0'. If you would like to change this behaviour, edit the value of the **Obstruction** variable.
