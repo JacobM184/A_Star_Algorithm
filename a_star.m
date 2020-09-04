@@ -111,7 +111,7 @@ function path = a_star(startCol, startRow, goalCol, goalRow, map)
 end
 
 function heuristic = calcH(fromCol, fromRow, toCol, toRow)
-    % Pythagoras theorem to find distance to goal
+    % Pythagoras theorem to find Euclidean distance to goal
     heuristic = sqrt((fromCol - toCol).^2 + (fromRow - toRow).^2);
 end
 
